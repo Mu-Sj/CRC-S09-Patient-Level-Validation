@@ -43,6 +43,6 @@ statistics:
   no_parameter_tuning: true
 restrictions:
   - descriptive_concordance_only
-  - no_CDD_training_calibration_or_threshold_changes
+  - no_directional_model_training_calibration_or_threshold_changes
   - no_trajectory_or_pseudotime_activation
   - no_replacement_of_formal_holdout

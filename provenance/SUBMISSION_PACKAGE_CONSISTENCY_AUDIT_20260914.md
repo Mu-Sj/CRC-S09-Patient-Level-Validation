@@ -14,7 +14,7 @@ Audited the generic submission package after author, declaration, title-page, co
 - Author contributions: PASS; continuous-prose format with initials mapped in the author-information file.
 - Figure alt text: PASS; Figure 1-5 and Supplementary Figure 1-6 are covered.
 - Reference coverage: PASS; 38 references are cited in the manuscript and no citation number is out of range.
-- Deprecated CDD content: PASS; no deprecated CDD claim or analysis appears in active manuscript files.
+- Deprecated directional-model content: PASS; no deprecated directional-model claim or analysis appears in active manuscript files.
 
 ## Remaining journal-dependent items
 

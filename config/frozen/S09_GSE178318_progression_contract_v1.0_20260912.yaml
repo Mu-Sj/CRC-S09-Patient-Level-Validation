@@ -45,4 +45,4 @@ restrictions:
   - descriptive_concordance_only
   - COL17_liver_metastasis_reported_separately
   - no_trajectory_or_pseudotime_activation
-  - no_CDD_training_calibration_or_threshold_changes
+  - no_directional_model_training_calibration_or_threshold_changes

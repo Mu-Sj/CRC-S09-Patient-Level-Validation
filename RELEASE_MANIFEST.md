@@ -6,4 +6,4 @@ Included: English README and reproducibility instructions, deterministic renderi
 
 Excluded: raw count matrices, FASTQ/BAM archives, private or identifiable data, credentials, temporary files, and historical internal planning documents that are not required for public reproducibility.
 
-The release is reporting-only. It does not contain CDD, parameter tuning, pooled-cell inference or a new validation analysis.
+The release is reporting-only. It does not contain a directional model, parameter tuning, pooled-cell inference or a new validation analysis.

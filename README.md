@@ -9,7 +9,7 @@ The release documents a patient-level evaluation of colorectal cancer epithelial
 - GSE294300 is the independent paired validation cohort.
 - GSE315534, GSE178318 and the Moorman 2024 cohort are separate descriptive progression cohorts.
 - The analysis is frozen and reporting-only. No parameter tuning, pooled-cell inference or post hoc validation is included.
-- CDD is deprecated and is not part of this release.
+- No directional model, parameter tuning or post hoc validation is part of this release.
 
 ## Repository contents
 
