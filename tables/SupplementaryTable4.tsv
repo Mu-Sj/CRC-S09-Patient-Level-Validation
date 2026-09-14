@@ -1,0 +1,8 @@
+method	replicates	pass	abstention	invalid	note	audit	resource_layer	attempts	status	absolute_spearman
+PAGA	10.0	10	0	0	execution only	patient_bootstrap				
+Palantir	10.0	8	2	0	2 ARPACK abstentions	patient_bootstrap				
+Slingshot	10.0	6	4	0	4 graph/linear-system abstentions	patient_bootstrap				
+Monocle3	10.0	10	0	0	cap=2,000; all finite	patient_bootstrap				
+Palantir		6	0	0		root_sensitivity	full input	6.0	PASS	0.437–0.999
+Monocle3		6	0	0		root_sensitivity	cap=500 cells/patient	6.0	PASS	0.065–0.847
+Slingshot		0	0	9		root_sensitivity	cap=500 cells/patient	9.0	INVALID_RESULT	0.768–0.948 finite cells only

@@ -1,0 +1,19 @@
+artifact: S08_real_crc_root_failure_contract
+version: v1.0
+status: FROZEN_APPROVED_20260908
+scope: GSE236581_crc_discovery
+root:
+  biological_anchor: Tissue_equals_Normal
+  candidate_set: all_cells_with_Tissue_Normal
+  embedding: PCA_on_dataset_specific_frozen_preprocessing
+  palantir_and_monocle3: medoid_of_normal_candidate_set
+  slingshot: normal_candidate_cluster_as_start_cluster
+  tie_break: lexicographically_smallest_cell_id
+failure:
+  missing_root_anchor: ABSTENTION
+  fewer_than_50_normal_cells: ABSTENTION
+  nonfinite_pseudotime: INVALID_RESULT
+  missing_branch_output: ABSTENTION
+bootstrap:
+  unit: complete_patient
+  replicates: 10

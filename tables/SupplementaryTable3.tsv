@@ -1,0 +1,5 @@
+dataset	evidence_tier	evidence_basis	arm_context	permitted_role
+GSE294300	Auxiliary genomic consistency	CNV audit available; not malignant-cell truth	Normal/primary paired	Primary endpoint; conditional descriptive
+GSE315534	Supportive proxy	Author-reported CNV summary; no barcode-level CNV truth	Primary/liver metastasis	Descriptive progression only
+GSE178318	Restricted / uncertain	Paper-level InferCNV; no public recomputable cell-level label; COL17-LM low-count	Primary/liver metastasis	Descriptive; sensitivity limitation
+Moorman 2024	Stronger public label	Exact public malignant-cell label and non-malignant epithelial reference	Primary/metastasis	Descriptive progression only

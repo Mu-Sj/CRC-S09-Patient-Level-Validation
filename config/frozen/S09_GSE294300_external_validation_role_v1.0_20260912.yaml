@@ -1,0 +1,39 @@
+artifact: S09_GSE294300_external_validation_role
+version: v1.0
+status: FROZEN_APPROVED_20260912
+dataset: GSE294300
+role: CRC-external-validation
+design: paired_adjacent_normal_primary_crc_single_cell
+patients_total: 18
+patients_primary: 16
+patients_sensitivity: [patient_1, patient_17]
+samples: 36
+pairing: 18_normal_tumor_pairs
+input:
+  source: data/raw/GSE294300/GSE294300_RAW.tar
+  derived_input: data/processed/GSE294300_lenient_candidates_v1
+  count_representation: sparse_matrix_market
+  cell_calling: frozen_barcode_rank_lenient_candidate_policy
+  qc_policy: config/frozen/S03_gse294300_input_policy_v1.0_20260826.yaml
+eligibility:
+  primary_patient_rule: each_normal_and_tumor_sample_has_at_least_500_candidate_barcodes
+  epithelial_rule: each_primary_tumor_patient_has_at_least_100_epithelial_candidates_after_S04
+  patient_1: sensitivity_only_normal_sample_and_normal_epithelial_reference_below_floor
+  patient_17: sensitivity_only_normal_sample_below_500_candidate_floor
+malignancy_evidence:
+  audit: analysis/04_annotation_malignancy/runs/20260905_S04_gse294300_epithelial_cnv_v1/README.md
+  cnv_reference: normal_epithelial_candidates
+  interpretation: auxiliary_genomic_consistency_only
+  malignant_truth_label: prohibited
+scope:
+  primary: normal_to_primary_frozen_state_and_trajectory_concordance
+  secondary: patient_level_method_stability_and_failure_diagnostics
+  sensitivity: include_patient_1_and_patient_17_without_changing_primary_denominator
+  prohibited: [true_lineage_claim, conversion_probability, experimental_lineage, metastasis_claim]
+freeze_rules:
+  no_tuning_from_validation: true
+  patient_is_statistical_unit: true
+  cells_are_not_independent_replicates: true
+  report_primary_patients: 16
+  report_sensitivity_patients: 2
+  keep_validation_results_sealed_until_run_start: true

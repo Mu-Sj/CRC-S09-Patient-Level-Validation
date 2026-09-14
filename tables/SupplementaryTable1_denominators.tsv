@@ -1,0 +1,6 @@
+dataset	role	inference_unit	n_independent	design_note
+GSE294300	Primary endpoint	patient	16	paired normal + primary
+GSE294300	Sensitivity layer	patient	2	retained outside primary denominator
+GSE315534	Progression descriptive	patient	3	primary + liver metastasis
+GSE178318	Progression descriptive	patient	6	primary + liver metastasis
+Moorman 2024	Progression descriptive	donor	6	primary + metastasis

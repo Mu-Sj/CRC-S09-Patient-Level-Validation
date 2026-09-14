@@ -1,0 +1,33 @@
+artifact: S09_GSE302903_external_validation_role
+version: v1.0
+status: FROZEN_APPROVED_20260912
+dataset: GSE302903
+role: CRC-external-validation
+design: tumor_only_single_cell_crc
+patients: 12
+samples: 12
+independence: independent_candidate_from_GSE236581; verify_no_overlap_before_unlock
+input:
+  source: data/raw/GSE302903/GSE302903_RAW.tar
+  derived_input: data/interim/GSE302903
+  count_representation: sparse_matrix_market
+  cell_calling: deposited_EmptyDrops_CR_matrix; provenance_limit_retained
+  qc_policy: inherited_candidate_level_audit; no_post_hoc_patient_exclusion
+malignancy_evidence:
+  audit: analysis/04_annotation_malignancy/runs/20260912_S04_gse302903_epithelial_cnv_v1/S04_GSE302903_MALIGNANCY_AUDIT.md
+  epithelial_marker_rule: at_least_2_of_8_markers
+  cnv_reference: immune_like_proxy; no_normal_epithelial_arm
+  patient_tiers: 9_SUPPORTIVE_PROXY; 3_UNCERTAIN_PROXY
+  interpretation: supportive_tumor_evidence_only
+  normal_vs_tumor_claim: prohibited
+scope:
+  primary: tumor_state_and_direction_generalization
+  secondary: patient_level_method_stability_and_failure_diagnostics
+  prohibited: [normal_to_tumor_paired_contrast, true_lineage_claim, conversion_probability, experimental_lineage]
+freeze_rules:
+  no_tuning_from_validation: true
+  patient_is_statistical_unit: true
+  cells_are_not_independent_replicates: true
+  report_all_12_patients: true
+  report_uncertain_proxy_patients_separately: true
+  open_results_only_after_s09_contract_review: true

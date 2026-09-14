@@ -1,0 +1,37 @@
+artifact: S08_real_crc_root_sensitivity
+version: v1.0
+status: APPROVED_FOR_S08_AUDIT_20260911
+scope: GSE236581_crc_discovery
+parent_contract: S08_real_crc_root_failure_contract_v1.0_20260908
+purpose: descriptive_root_perturbation_sensitivity_only
+input_preprocessing:
+  normalize_total_target_sum: 10000
+  log1p: true
+  pca_components: 30
+  neighbors: 15
+  random_seed: 20260908
+palantir_monocle3_root_candidates:
+  anchor_set: Tissue_equals_Normal
+  candidates: frozen_medoid_plus_pc1_quantiles
+  pc1_quantiles: [0.0, 0.25, 0.5, 0.75, 1.0]
+  selection: sort_normal_cells_by_pc1_then_cell_id; choose_nearest_rank
+  duplicate_policy: retain_unique_cell_ids_in_sorted_order
+slingshot_root_candidates:
+  anchor_set: Tissue_equals_Normal
+  candidates: all_normal_containing_clusters_with_at_least_50_normal_cells
+  cluster_field: leiden_s05_corrected
+comparison:
+  primary_reference: existing_frozen_normal_root_output
+  statistic: spearman_correlation_to_primary_pseudotime
+  orientation: report_signed_and_absolute_correlation
+  no_truth_claim: true
+  no_tuning: true
+failure:
+  record_each_candidate_attempt: true
+  missing_root_or_graph: ABSTENTION
+  nonfinite_pseudotime: INVALID_RESULT
+prohibitions:
+  - change_frozen_primary_root
+  - select_candidates_after_viewing_outputs
+  - treat_cells_as_independent_replicates
+  - create_composite_score_or_software_ranking

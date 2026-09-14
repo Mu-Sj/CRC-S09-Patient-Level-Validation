@@ -1,0 +1,30 @@
+artifact: S08_monocle3_patient_bootstrap_cell_cap
+version: v1.1
+status: APPROVED_FROZEN_20260911
+supersedes: S08_monocle3_patient_bootstrap_cell_cap_v1.0_20260911
+scope: GSE236581_crc_discovery_monocle3_patient_bootstrap
+bootstrap:
+  unit: complete_patient
+  replicates: 10
+  patient_sampling: with_replacement
+  within_patient_cell_sampling: without_replacement
+  cell_cap_per_patient_draw: 2000
+  sampling_rule: min(patient_cell_count, 2000)
+  repeated_patient_draws: independently_resample_cells_for_each_draw
+  random_seed: 20260908_plus_replicate
+trajectory_refit_per_replicate:
+  - preprocess_cds
+  - reduce_dimension_umap
+  - cluster_cells
+  - learn_graph
+  - order_cells_from_frozen_normal_root_rule
+counts_representation: dgCMatrix_sparse
+selection_basis:
+  pilot_caps: [1000, 2000, 3000]
+  selected_cap: 2000
+  rationale: cap_3000_reached_memory_limit_and_caused_swap_during_formal_replicate_2; cap_2000_pilot_completed_successfully
+prohibitions:
+  - mix_outputs_from_different_cell_caps
+  - reuse_replicate_0_graph_for_bootstrap
+  - treat_cells_as_independent_bootstrap_units
+  - convert_counts_to_dense

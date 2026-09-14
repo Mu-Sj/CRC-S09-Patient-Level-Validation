@@ -1,0 +1,28 @@
+artifact: S08_real_crc_root_sensitivity
+version: v1.1
+status: APPROVED_FOR_S08_AUDIT_20260911
+supersedes: S08_real_crc_root_sensitivity_v1.0_20260911
+scope: GSE236581_crc_discovery_root_sensitivity_only
+reason_for_revision: full_76056_cell_slingshot_root_loop_exceeded_two_hours_without_output; preserve_palantir_full_run_and_bound_r_resource_use
+parent_contract: S08_real_crc_root_failure_contract_v1.0_20260908
+resource_stratum:
+  cells_per_patient_cap: 500
+  sampling: without_replacement
+  random_seed: 20260911
+  candidate_roots_forced_into_subset: true
+  interpretation: sensitivity_stratum_not_primary_result
+root_candidates:
+  palantir_monocle3: frozen_medoid_plus_pc1_quantiles_from_v1.0
+  slingshot: all_normal_containing_clusters_with_at_least_50_normal_cells_in_capped_subset
+comparison:
+  primary_reference: existing_frozen_normal_root_output
+  statistic: spearman_correlation_to_primary_pseudotime_on_capped_cells
+  orientation: report_signed_and_absolute_correlation
+  no_truth_claim: true
+  no_tuning: true
+prohibitions:
+  - mix_capped_sensitivity_with_full_input_bootstrap
+  - change_frozen_primary_root
+  - select_candidates_after_viewing_outputs
+  - treat_cells_as_independent_replicates
+  - create_composite_score_or_software_ranking

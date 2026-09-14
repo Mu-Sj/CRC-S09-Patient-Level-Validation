@@ -1,0 +1,8 @@
+table	file	linked_figure	description
+Supplementary Table 1a	SupplementaryTable1_denominators.tsv	Supplementary Figure 1	Frozen independent-unit denominators by analysis role
+Supplementary Table 1b	SupplementaryTable1_GSE294300_cell_QC.tsv	Supplementary Figure 1	GSE294300 per-patient cell and scoreability coverage
+Supplementary Table 2	SupplementaryTable2.tsv	Supplementary Figure 2	Candidate input matrix and structural QC inventory
+Supplementary Table 3	SupplementaryTable3.tsv	Supplementary Figure 3	Malignancy/CNV evidence tiers and cohort restrictions
+Supplementary Table 4	SupplementaryTable4.tsv	Supplementary Figure 4	Root sensitivity, bootstrap execution and failure records
+Supplementary Table 5	SupplementaryTable5.tsv	Supplementary Figure 5	GSE178318 COL17-LM low-count sensitivity layer
+Supplementary Table 6	SupplementaryTable6.tsv	Supplementary Figure 6	Patient/donor progression deltas and cohort identifiers

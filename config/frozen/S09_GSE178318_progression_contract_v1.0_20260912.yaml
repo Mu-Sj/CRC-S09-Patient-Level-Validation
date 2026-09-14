@@ -1,0 +1,48 @@
+artifact: S09_GSE178318_progression_contract
+version: v1.0
+status: FROZEN_CONDITIONAL_DESCRIPTIVE_ONLY
+approved_date: 2026-09-13
+dataset: GSE178318
+role: crc_progression_concordance
+evidence_gate:
+  malignancy_status: RESTRICTED_CONDITIONAL
+  cnv_reference: PBMC_proxy_only
+  interpretation: supportive_genomic_consistency_only
+  malignant_cell_truth: not_generated
+  low_count_patient: COL17_liver_metastasis_retained_as_sensitivity_only
+design:
+  patients: [COL07, COL12, COL15, COL16, COL17, COL18]
+  tissues: [primary_CRC, liver_metastasis]
+  complete_progression_pairs: 6
+  inferential_unit: complete_patient
+  cells_are_not_independent_replicates: true
+  treatment_strata: [treatment_naive, preoperative_chemotherapy]
+input:
+  deposited_aggregate_10x_matrix: true
+  barcode_boundary_recovered: true
+  counts_preserved: true
+  marker_gate: [EPCAM, KRT8, KRT18, KRT19, KRT20, MUC1, MUC13, CEACAM5, CEACAM6, SOX9]
+  minimum_marker_hits: 2
+  minimum_umi: 1000
+  low_count_threshold: 100
+state_endpoint:
+  modules: [ABSORPTIVE_BEST4_CA4, SECRETORY_MUC2_TFF3]
+  gene_source: config/frozen/S05_state_system_v2.0_20260902.yaml
+  score: mean_log1p_cp10k_over_present_frozen_genes
+  minimum_module_genes_present: 3
+  primary_edge: primary_CRC_to_liver_metastasis
+  report: patient_deltas, complete_patient_bootstrap_95_percentile_ci, treatment_stratified_sensitivity
+statistics:
+  bootstrap_unit: complete_patient
+  bootstrap_replicates: 10000
+  bootstrap_seed: 20260913
+  confidence_interval: percentile_95
+  no_pooled_cell_p_values: true
+  no_software_ranking: true
+  no_lineage_or_conversion_claim: true
+  no_parameter_tuning: true
+restrictions:
+  - descriptive_concordance_only
+  - COL17_liver_metastasis_reported_separately
+  - no_trajectory_or_pseudotime_activation
+  - no_CDD_training_calibration_or_threshold_changes

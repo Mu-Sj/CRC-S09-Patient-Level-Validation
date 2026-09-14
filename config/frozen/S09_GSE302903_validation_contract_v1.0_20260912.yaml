@@ -1,0 +1,60 @@
+artifact: S09_GSE302903_validation_contract
+version: v1.0
+status: FROZEN_APPROVED_FOR_UNLOCK_20260912
+dataset: GSE302903
+role_config: config/frozen/S09_GSE302903_external_validation_role_v1.0_20260912.yaml
+independence_audit: analysis/09_external_validation/S09_GSE302903_INDEPENDENCE_AUDIT.md
+software:
+  methods: [PAGA, Palantir, Slingshot, Monocle3]
+  versions_from_frozen_spec: config/frozen/S06_crc_differentiation_software_benchmark_spec_v1.2_20260906.yaml
+  environments: {python: cast-py, r: cast-r}
+input_rules:
+  datasets_processed_separately: true
+  raw_counts_preserved: true
+  patient_is_inference_unit: true
+  cells_are_not_independent_replicates: true
+  cnv_is_malignancy_evidence_only: true
+  velocity_and_cellrank: excluded
+state_endpoint:
+  primary: patient_level_frozen_state_mapping_concordance
+  state_system: config/frozen/S05_state_system_v2.0_20260902.yaml
+  module_score: mean_log1p_cp10k_over_present_frozen_genes
+  minimum_module_genes_present: 3
+  hard_mapping_margin: 0.05
+  mapping_rule: assign_highest_module_only_if_margin_reaches_threshold; otherwise_abstain
+  report: patient_count, patient_fraction, state_score_effects, 95_percent_ci
+  no_retraining_or_threshold_changes: true
+trajectory_endpoint:
+  secondary: method_execution_and_patient_bootstrap_stability
+  bootstrap_unit: complete_patient
+  replicates: 10
+  interval: percentile_95
+  report: structural_pass_rate, abstention_rate, invalid_result_rate, method_specific_stability
+direction_endpoint:
+  status: conditional_secondary_only
+  root_rule: use_only_a_predeclared_upstream_state_or_approved_annotation_anchor
+  no_normal_arm_action: abstain_if_no_valid_root_anchor
+  direction_claim: prohibited_as_lineage_truth_or_conversion_probability
+  report: signed_and_absolute_rank_agreement_only_when_root_is_valid
+failure_contract:
+  missing_root_anchor: ABSTENTION
+  fewer_than_50_anchor_cells: ABSTENTION
+  nonfinite_pseudotime: INVALID_RESULT
+  missing_branch_output: ABSTENTION
+  software_error: HARD_FAILURE
+  preserve_failed_replicate_record: true
+root_and_preprocessing:
+  freeze_before_unlock: true
+  no_root_selection_after_validation_results: true
+  no_dense_counts_conversion: true
+  no_cap_mixing: true
+aggregation:
+  no_composite_score: true
+  no_software_ranking_from_real_crc: true
+  no_pooled_cell_p_values: true
+  patient_level_bootstrap_only: true
+decision_rules:
+  no_edge_reproduction: downgrade_directional_claim: true
+  uncertain_malignancy_patients: report_separately_and_retain: true
+  normal_to_tumor_claim: prohibited
+  validation_results_sealed_until_contract_review: true

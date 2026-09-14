@@ -1,0 +1,48 @@
+artifact: S09_Moorman_progression_contract
+version: v1.0
+status: FROZEN_CONDITIONAL_DESCRIPTIVE_ONLY
+approved_date: 2026-09-13
+dataset: Moorman_2024_CELLxGENE
+role: crc_progression_concordance
+source: Nature_2024_Progressive_plasticity_during_colorectal_cancer_metastasis
+evidence_gate:
+  public_cell_level_malignant_label: cell_type_exact_malignant_cell
+  normal_reference: Sample_Type_Non-Tumor_and_nonmalignant_epithelial_cells
+  cnv_source: author_infercnv_reported_in_source_paper
+  malignancy_truth_scope: public_cell_level_label_for_selected_donors
+  minimum_cells_per_arm: 100
+  retain_low_count_or_failed_donors: report_and_exclude_from_primary_summary
+design:
+  donors: [136, 146, 150, 151, 183, 283]
+  tissues: [normal, primary, metastasis]
+  complete_three_arm_donors: 6
+  inferential_unit: donor_patient
+  cells_are_not_independent_replicates: true
+  treatment_strata: [untreated, treated]
+input:
+  h5ad: data/raw/cellxgene/moorman_2024/epithelial.h5ad
+  matrix_layer: raw/X
+  counts_preserved: true
+  patient_manifest: analysis/04_annotation_malignancy/runs/20260913_0115_S04_moorman_patient_manifest_audit_v1/moorman_target_donor_reconciliation.tsv
+state_endpoint:
+  modules: [ABSORPTIVE_BEST4_CA4, SECRETORY_MUC2_TFF3]
+  gene_source: config/frozen/S05_state_system_v2.0_20260902.yaml
+  score: mean_log1p_cp10k_over_present_frozen_genes
+  minimum_module_genes_present: 3
+  primary_edge: primary_to_distant_metastasis
+  normal_arm: descriptive_context_only
+  report: donor_deltas, complete_donor_bootstrap_95_percentile_ci, treatment_stratified_sensitivity
+statistics:
+  bootstrap_unit: complete_donor_patient
+  bootstrap_replicates: 10000
+  bootstrap_seed: 20260913
+  confidence_interval: percentile_95
+  no_pooled_cell_p_values: true
+  no_software_ranking: true
+  no_lineage_or_conversion_claim: true
+  no_parameter_tuning: true
+restrictions:
+  - descriptive_concordance_only
+  - no_CDD_training_calibration_or_threshold_changes
+  - no_trajectory_or_pseudotime_activation
+  - no_replacement_of_formal_holdout
