@@ -1,6 +1,6 @@
-# CRC S09 Patient-Level Validation
+# An auditable framework for patient- and donor-level evaluation of colorectal cancer epithelial state programs across independent single-cell cohorts
 
-This repository contains the frozen S09 reproducibility release for the study **Patient-level validation of colorectal cancer epithelial state programs across independent single-cell cohorts**.
+This repository contains the frozen S09 reproducibility release for the study **An auditable framework for patient- and donor-level evaluation of colorectal cancer epithelial state programs across independent single-cell cohorts**.
 
 The release documents a patient-level evaluation of colorectal cancer epithelial expression-state programs, a trajectory-execution audit, and separate descriptive progression analyses across public single-cell cohorts. Patients or donors are the inferential units; cells are used for coverage and quality-control accounting and are not treated as independent biological replicates.
 
